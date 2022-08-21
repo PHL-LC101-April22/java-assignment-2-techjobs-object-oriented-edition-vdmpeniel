@@ -24,8 +24,8 @@ public abstract class JobField {
     @Override
     public boolean equals(Object o) {
         return (this == o)? true
-                :(o == null || !(o instanceof PositionType))? false
-                :((PositionType) o).getId() == id;
+                :((o == null) || (o.getClass() != this.getClass()))? false
+                :(this.getClass().cast(o)).getId() == id;
     }
     @Override
     public int hashCode() {

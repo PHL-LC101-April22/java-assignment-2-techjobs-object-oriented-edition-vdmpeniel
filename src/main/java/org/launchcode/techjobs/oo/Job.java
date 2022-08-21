@@ -27,10 +27,10 @@ public class Job {
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         return (this == o)? true
-               :(o == null || !(o instanceof PositionType))? false
-               :((PositionType) o).getId() == id;
+                :((o == null) || (o.getClass() != this.getClass()))? false
+                :(this.getClass().cast(o)).getId() == id;
     }
     @Override
     public int hashCode(){
@@ -47,7 +47,7 @@ public class Job {
                 && (Objects.isNull(coreCompetency) || coreCompetency.getValue().isEmpty() || coreCompetency.getValue().isBlank())
             )? "OOPS! This job does not seem to exist."
                 : String.format(
-                    "\nID:  %d\n" +
+                    "\nID: %d\n" +
                     "Name: %s\n" +
                     "Employer: %s\n" +
                     "Location: %s\n" +

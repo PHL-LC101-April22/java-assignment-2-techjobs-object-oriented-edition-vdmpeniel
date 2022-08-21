@@ -15,7 +15,6 @@ import static org.junit.Assert.*;
 public class JobTest {
     @Test
     public void testSettingJobId(){
-        System.out.println("Starting testSettingJobId...");
         Job firstJob = new Job();
         Job secondJob = new Job();
         assertNotEquals(firstJob.getId(), secondJob.getId());
@@ -48,16 +47,15 @@ public class JobTest {
     public void testToStringStartsAndEndsWithNewLine(){
         Job firstJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         System.out.println(firstJob.toString());
-        assertTrue(firstJob.toString().startsWith("\n"));
-        assertTrue(firstJob.toString().endsWith("\n"));
+        assertEquals((long) firstJob.toString().charAt(0), 10l);
+        assertEquals((long) firstJob.toString().charAt(firstJob.toString().length() - 1), 10l);
     }
 
     @Test
     public void testToStringContainsCorrectLabelsAndData(){
         Job firstJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        System.out.println(firstJob.toString());
         assertEquals(String.format(
-                "\nID:  %d\n" +
+                "\nID: %d\n" +
                 "Name: %s\n" +
                 "Employer: %s\n" +
                 "Location: %s\n" +
@@ -72,7 +70,12 @@ public class JobTest {
         ), firstJob.toString());
 
 
-        firstJob = new Job(
+        firstJob = new Job();
+        assertEquals("OOPS! This job does not seem to exist.", firstJob.toString());
+    }
+
+    public void testToStringHandlesEmptyField(){
+        Job firstJob = new Job(
                 "Product tester",
                 new Employer(""),
                 new Location("Desert"),
@@ -93,10 +96,5 @@ public class JobTest {
                 "Data not available",
                 "Persistence"
         ), firstJob.toString());
-
-
-
-        firstJob = new Job();
-        assertEquals("OOPS! This job does not seem to exist.", firstJob.toString());
     }
 }
