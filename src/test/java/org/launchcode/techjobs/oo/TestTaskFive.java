@@ -9,8 +9,7 @@ import org.launchcode.techjobs.oo.test.JobTest;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * Created by LaunchCode
@@ -165,5 +164,7 @@ public class TestTaskFive extends AbstractTest {
         String jobString = getJobString(job);
         assertEquals(jobString, job.toString());
     }
+
+
 
 }
