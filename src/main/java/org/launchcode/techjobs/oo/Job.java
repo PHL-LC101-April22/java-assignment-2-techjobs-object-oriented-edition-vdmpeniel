@@ -29,12 +29,37 @@ public class Job {
     @Override
     public boolean equals(Object o){
         return (this == o)? true
-                :(o == null || !(o instanceof PositionType))? false
-                :((PositionType) o).getId() == id;
+               :(o == null || !(o instanceof PositionType))? false
+               :((PositionType) o).getId() == id;
     }
     @Override
     public int hashCode(){
         return Objects.hash(getId());
+    }
+    @Override
+    public String toString(){
+        String emptyData = "Data not available";
+        return (
+                (Objects.isNull(name) || name.isEmpty() || name.isBlank())
+                && (Objects.isNull(employer) || employer.getValue().isEmpty() || employer.getValue().isBlank())
+                && (Objects.isNull(location) || location.getValue().isEmpty() || location.getValue().isBlank())
+                && (Objects.isNull(positionType) || positionType.getValue().isEmpty() || positionType.getValue().isBlank())
+                && (Objects.isNull(coreCompetency) || coreCompetency.getValue().isEmpty() || coreCompetency.getValue().isBlank())
+            )? "OOPS! This job does not seem to exist."
+                : String.format(
+                    "\nID:  %d\n" +
+                    "Name: %s\n" +
+                    "Employer: %s\n" +
+                    "Location: %s\n" +
+                    "Position Type: %s\n" +
+                    "Core Competency: %s\n",
+                    id,
+                    ((Objects.isNull(name) || name.isEmpty() || name.isBlank())? emptyData : name),
+                    ((Objects.isNull(employer.getValue()) || employer.getValue().isEmpty() || employer.getValue().isBlank())? emptyData : employer.getValue()),
+                    ((Objects.isNull(location.getValue()) || location.getValue().isEmpty() || location.getValue().isBlank())? emptyData : location.getValue()),
+                    ((Objects.isNull(positionType.getValue()) || positionType.getValue().isEmpty() || positionType.getValue().isBlank())? emptyData : positionType.getValue()),
+                    ((Objects.isNull(coreCompetency.getValue()) || coreCompetency.getValue().isEmpty() || coreCompetency.getValue().isBlank())? emptyData : coreCompetency.getValue())
+                );
     }
 
 
